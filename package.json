@@ -1,0 +1,28 @@
+{
+  "name": "statistic-module",
+  "version": "0.0.1",
+  "description": "Modulo para la generación y edición de estadisticas deportivas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-management/module-statistics.git"
+  },
+  "author": "Pablo Sanchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-management/module-statistics/issues"
+  },
+  "homepage": "https://github.com/team-management/module-statistics#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "async-redis": "^1.1.7",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7"
+  }
+}
