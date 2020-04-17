@@ -2,8 +2,8 @@
 module.exports = getStatistics = async (mongoUri, userId, statistic, res) => {
     //Require mongoose
     const mongoose = require('mongoose');
-    const log = require("../online-log").log
-    const {Statistic} = require('./mongooseModel')
+    const log = require("online-log").log
+    const {Statistic} = require('../mongooseModel')
 
     
 
@@ -13,7 +13,7 @@ module.exports = getStatistics = async (mongoUri, userId, statistic, res) => {
 
     //Connect to database
     try {
-        await mongoose.connect(mongoUri, {
+        await mongoose.connect(mongoUri + "/statistic-module", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             connectTimeoutMS: 10000
@@ -33,7 +33,7 @@ module.exports = getStatistics = async (mongoUri, userId, statistic, res) => {
     const error = statistic_1.validateSync();
     if (error) {
         log("WARN", "Validation error on requerst body against Statistics schema")
-        res.status(403).send({ msg: "Validation error on requerst body against Statistics schema" })
+        res.status(403).json({ msg: "Validation error on requerst body against Statistics schema" })
         return;
     }
     var db = mongoose.connection;
@@ -42,12 +42,12 @@ module.exports = getStatistics = async (mongoUri, userId, statistic, res) => {
             log("ERROR", "There has beeing an error trying to store new statistic on database")
             log("ERROR", err);
             db.close();
-            res.status(500).send({ msg: "There has beeing an error trying to store new statistic on database" });
+            res.status(500).json({ msg: "There has beeing an error trying to store new statistic on database" });
         }
         log("DEBUG", "New statistics saved to statitcis collection.");
         db.close();
 
-        res.status(200).send(statistic)
+        res.status(200).json(statistic)
     });
 
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-    const log = require("../online-log").log
+    const log = require("online-log").log
 
     //TODO: Object validation 
     //Create squema
@@ -27,3 +27,5 @@ const mongoose = require('mongoose');
     });
 
     module.exports.Statistic = mongoose.model("Statistic", statisticSchema);
+
+    

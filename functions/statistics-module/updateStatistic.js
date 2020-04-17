@@ -1,17 +1,17 @@
 
-module.exports = getStatistics = async (mongoUri, userId, filter, res) => {
+module.exports = updateStatistic = async (mongoUri, userId, operation,value, res) => {
     //Require mongoose
     const mongoose = require('mongoose');
-    const log = require("../online-log").log
-    const {Statistic} = require('./mongooseModel')
+    const log = require("online-log").log
+    const {Statistic} = require('../mongooseModel')
 
    
     //Starting logic---------------
-    log("DEBUG", `Request recieved fir searching for statistic documents:  ${mongoUri} , ${userId}, ${JSON.stringify(filter)}`);
+    log("DEBUG", `Request recieved updating statistic:  ${mongoUri} , ${userId}, ${JSON.stringify(filter)}`);
 
     //Connect to database
     try {
-        await mongoose.connect(mongoUri, {
+        await mongoose.connect(mongoUri + "/statistic-module", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             connectTimeoutMS: 10000
@@ -26,17 +26,17 @@ module.exports = getStatistics = async (mongoUri, userId, filter, res) => {
     //Once connected
     var db = mongoose.connection;
     //Execute find query
-    Statistic.find({}, (err, result) => {
+    Statistic.find(filter, (err, result) => {
         if (err) {
             log("ERROR", "There has beeing an error trying to store new statistic on database")
             log("ERROR", err);
             db.close();
-            res.status(500).send({ msg: "There has beeing an error trying to store new statistic on database" });
+            res.status(500).json({ msg: "There has beeing an error trying to store new statistic on database" });
         }
 
         log("DEBUG", `Query successfully executed with ${result.length} results`);
         db.close();
-        res.status(200).send(result)
+        res.status(200).json(result)
 
     });
 
