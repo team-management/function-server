@@ -11,9 +11,9 @@ const online_log = require("online-log")
 const log = online_log.log;
 
 //Initializing online-log
-online_log(app);
+online_log(app, {enable_console_print: true, enable_colorful_console: true});
 
-log("DEBUG", "This is a debug log line")
+//("DEBUG", "This is a debug log line")
 
 //Function router
 app.use('/functions', require('./functions/router'));

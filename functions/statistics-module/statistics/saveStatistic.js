@@ -1,24 +1,29 @@
 
-module.exports = getStatistics = async (mongoUri, userId, statistic, res) => {
+module.exports = getStatistics = async (clientId, statistic, res) => {
     //Require mongoose
     const mongoose = require('mongoose');
     const log = require("online-log").log
-    const {Statistic} = require('../mongooseModel')
+    const {Statistic} = require('../../mongooseModel')
 
     
 
 
     //Starting logic---------------
-    log("DEBUG", `Request recieved for inserting new statistic :  ${mongoUri} , ${userId}, ${JSON.stringify(statistic)}`);
-
+    log("DEBUG", `Request recieved for inserting new statistic :   ${clientId}, ${JSON.stringify(statistic)}`);
+    //console.log('TRACE', values);
     //Connect to database
+    //FIXME: Uri generating in production (with APIGateway for mongos databases)
+    //const mongoUri = `mongodb://localhost:27017/${clientId}/statistic-module`
+    //Uri generating for development (unique mongo uri)
+    const mongoUri = `mongodb://localhost:27017/statistic-module`
+
     try {
-        await mongoose.connect(mongoUri + "/statistic-module", {
+        await mongoose.connect(mongoUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             connectTimeoutMS: 10000
         });
-        log("DEBUG", "Successfully connected to database");
+        console.log("DEBUG", "Successfully connected to database");
 
     }
     catch (error) {

@@ -22,10 +22,11 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
+    "@rugdev/module-statistic-moongose_model": "0.1.0-beta",
     "async-redis": "^1.1.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.9",
-    "online-log": "^0.1.17"
+    "mongoose": "^5.9.10",
+    "online-log": "^0.2.5"
   }
 }
